@@ -1,8 +1,19 @@
-# Telegram Wallet Vanity
+<div align="center">
 
-Finds a Telegram Wallet (Gram / "Money") address that ends with the text you choose, using the Apple GPU.
+# 💎 Telegram Wallet Vanity
 
-```
+**Find a Telegram Wallet address that ends with the text you choose — on the Apple GPU.**
+
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+![Platform: macOS](https://img.shields.io/badge/platform-macOS-lightgrey.svg)
+![GPU: Metal](https://img.shields.io/badge/GPU-Metal-orange.svg)
+![Node.js 20+](https://img.shields.io/badge/node-20%2B-green.svg)
+
+**English** · [Русский](README.ru.md)
+
+</div>
+
+```console
 $ ./gpu/gram-gpu goog
 GPU: Apple M2 · self-test passed
 
@@ -13,26 +24,38 @@ Wallet: tg · scheme: bip39 · 12 words
 Attempts: 1,272,971 in 94.3s (13503.4/sec)
 ```
 
-Unofficial project, not affiliated with Telegram or the TON Foundation.
+> [!NOTE]
+> Unofficial project, not affiliated with Telegram or the TON Foundation.
 
-## Requirements
+## ✨ Features
+
+- ⚡ **Fast** — about 13,500 wallets per second on an Apple M2
+- 🔒 **Verified** — every GPU match is derived again on the CPU before the phrase is shown
+- 🧪 **Self-testing** — the GPU kernel and the CPU verifier are checked against known vectors at every start
+- 💾 **Nothing stored** — the recovery phrase is printed once and never written to disk
+- 🎯 **Real Telegram wallets** — 12-word phrases you import straight into Telegram
+
+## 📋 Requirements
 
 - A Mac with a Metal GPU (developed and measured on an Apple M2)
 - Xcode Command Line Tools: `xcode-select --install`
 - Node.js 20 or newer
 
-## Build
+## 🚀 Quick start
 
 ```sh
+git clone https://github.com/CraftStick/Telegram_Wallet_Vanity.git
+cd Telegram_Wallet_Vanity
 ./gpu/build-mac.sh
+./gpu/gram-gpu abc
 ```
 
-This installs the Node dependencies, compiles `gpu/gram-gpu` and runs a 5-second benchmark.
+The build script installs the Node dependencies, compiles `gpu/gram-gpu` and runs a 5-second benchmark.
 
-## Use
+## 🔧 Usage
 
 ```sh
-./gpu/gram-gpu <suffix>
+./gpu/gram-gpu <suffix> [options]
 ```
 
 The suffix is 1–8 address characters: letters, digits, `_` or `-`. Matching ignores case unless you pass `-c`.
@@ -43,16 +66,18 @@ The suffix is 1–8 address characters: letters, digits, `_` or `-`. Matching ig
 | `-v`, `--verbose` | Show setup details and one line per GPU batch |
 | `-b`, `--batch <n>` | Candidates per GPU dispatch (default: auto-tuned) |
 | `--benchmark <s>` | Measure speed for `<s>` seconds without keeping any wallet |
+| `-h`, `--help` | Show help |
 
-On long searches, keep the Mac awake: `caffeinate -i ./gpu/gram-gpu <suffix>`.
+> [!TIP]
+> On long searches, keep the Mac awake: `caffeinate -i ./gpu/gram-gpu <suffix>`
 
-## How long it takes
+## ⏱ How long it takes
 
 Each letter multiplies the work by 32 (64 with `-c`); each digit, `_` or `-` by 64.
 At about 13,500 wallets per second (Apple M2):
 
 | Letters | Average attempts | Average time |
-|---|---|---|
+|:---:|---:|---:|
 | 1–2 | up to ~1 thousand | instant |
 | 3 | ~33 thousand | ~3 seconds |
 | 4 | ~1 million | ~1.5 minutes |
@@ -66,15 +91,16 @@ takes three times longer. Stopping and restarting loses nothing.
 Only the non-bounceable address (`UQ…`) carries the suffix. The bounceable form (`EQ…`) of the same wallet ends
 differently.
 
-## Keeping the wallet safe
+## 🔐 Keeping the wallet safe
 
-- The recovery phrase is printed once, in the terminal, and is never written to disk. Write the 12 words down
-  before you close the window.
-- Anyone who sees the phrase controls the wallet. Do not paste it into chats, notes or screenshots.
+> [!WARNING]
+> Anyone who sees the recovery phrase controls the wallet. Do not paste it into chats, notes or screenshots.
+
+- The phrase is printed once, in the terminal. Write the 12 words down before you close the window.
 - Import the phrase into Telegram and check that the address matches before you send anything to it.
 - Run the search on a machine you trust.
 
-## How it works
+## ⚙️ How it works
 
 For every candidate the GPU kernel (`gpu/gram-gpu.metal`) runs the full derivation:
 
@@ -88,11 +114,9 @@ For every candidate the GPU kernel (`gpu/gram-gpu.metal`) runs the full derivati
 The entropy base comes from the system random generator and is fresh for every batch.
 
 The GPU only reports which candidate matched. `gram-verify.mjs` then derives the wallet again on the CPU with
-`@ton/crypto` and `@ton/ton`, and the phrase is printed only if that independent result has the suffix. The
-program also checks itself at start-up: the GPU kernel against known addresses, and the CPU verifier against a
-known vector, so a broken setup stops before the search rather than after it.
+`@ton/crypto` and `@ton/ton`, and the phrase is printed only if that independent result has the suffix.
 
-## Files
+## 📁 Files
 
 | File | Role |
 |---|---|
@@ -101,3 +125,15 @@ known vector, so a broken setup stops before the search rather than after it.
 | `gpu/gram-gpu-words.txt` | BIP39 English word list |
 | `gram-verify.mjs` | CPU verification and output of a match |
 | `gram-lib.mjs` | Address and key derivation used by the verifier |
+
+## 📄 License
+
+[MIT](LICENSE)
+
+---
+
+<div align="center">
+
+If you found this useful, consider leaving a ⭐ — it helps a lot!
+
+</div>

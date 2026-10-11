@@ -16,7 +16,7 @@ func fail(_ message: String, _ code: Int32 = 1) -> Never {
 }
 
 let help = """
-TON Atelier — Gram (Telegram Money) wallet suffix finder, Apple GPU
+Telegram Wallet Vanity — Gram (Telegram Money) wallet suffix finder, Apple GPU
 
 Usage:
   gram-gpu <suffix> [options]
