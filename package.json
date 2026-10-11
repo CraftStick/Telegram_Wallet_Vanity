@@ -1,0 +1,13 @@
+{
+  "name": "telegram-wallet-vanity",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@ton/crypto": "3.3.0",
+    "@ton/ton": "16.3.0"
+  }
+}
