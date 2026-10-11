@@ -4,11 +4,6 @@
 
 **Find a Telegram Wallet address that ends with the text you choose — on the Apple GPU.**
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-![Platform: macOS](https://img.shields.io/badge/platform-macOS-lightgrey.svg)
-![GPU: Metal](https://img.shields.io/badge/GPU-Metal-orange.svg)
-![Node.js 20+](https://img.shields.io/badge/node-20%2B-green.svg)
-
 **English** · [Русский](README.ru.md)
 
 </div>
