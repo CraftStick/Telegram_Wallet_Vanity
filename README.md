@@ -1,12 +1,8 @@
-<div align="center">
+# Telegram Wallet Vanity
 
-# 💎 Telegram Wallet Vanity
+[English](README.md) · [Русский](README.ru.md)
 
-**Find a Telegram Wallet address that ends with the text you choose — on the Apple GPU.**
-
-**English** · [Русский](README.ru.md)
-
-</div>
+Find a Telegram Wallet address that ends with the text you choose — on the Apple GPU.
 
 ```console
 $ ./gpu/gram-gpu goog
@@ -22,7 +18,7 @@ Attempts: 1,272,971 in 94.3s (13503.4/sec)
 > [!NOTE]
 > Unofficial project, not affiliated with Telegram or the TON Foundation.
 
-## ✨ Features
+## Features
 
 - ⚡ **Fast** — about 13,500 wallets per second on an Apple M2
 - 🔒 **Verified** — every GPU match is derived again on the CPU before the phrase is shown
@@ -30,13 +26,13 @@ Attempts: 1,272,971 in 94.3s (13503.4/sec)
 - 💾 **Nothing stored** — the recovery phrase is printed once and never written to disk
 - 🎯 **Real Telegram wallets** — 12-word phrases you import straight into Telegram
 
-## 📋 Requirements
+## Requirements
 
 - A Mac with a Metal GPU (developed and measured on an Apple M2)
 - Xcode Command Line Tools: `xcode-select --install`
 - Node.js 20 or newer
 
-## 🚀 Quick start
+## Quick start
 
 ```sh
 git clone https://github.com/CraftStick/Telegram_Wallet_Vanity.git
@@ -47,7 +43,7 @@ cd Telegram_Wallet_Vanity
 
 The build script installs the Node dependencies, compiles `gpu/gram-gpu` and runs a 5-second benchmark.
 
-## 🔧 Usage
+## Usage
 
 ```sh
 ./gpu/gram-gpu <suffix> [options]
@@ -66,7 +62,7 @@ The suffix is 1–8 address characters: letters, digits, `_` or `-`. Matching ig
 > [!TIP]
 > On long searches, keep the Mac awake: `caffeinate -i ./gpu/gram-gpu <suffix>`
 
-## ⏱ How long it takes
+## How long it takes
 
 Each letter multiplies the work by 32 (64 with `-c`); each digit, `_` or `-` by 64.
 At about 13,500 wallets per second (Apple M2):
@@ -86,7 +82,7 @@ takes three times longer. Stopping and restarting loses nothing.
 Only the non-bounceable address (`UQ…`) carries the suffix. The bounceable form (`EQ…`) of the same wallet ends
 differently.
 
-## 🔐 Keeping the wallet safe
+## Keeping the wallet safe
 
 > [!WARNING]
 > Anyone who sees the recovery phrase controls the wallet. Do not paste it into chats, notes or screenshots.
@@ -95,7 +91,7 @@ differently.
 - Import the phrase into Telegram and check that the address matches before you send anything to it.
 - Run the search on a machine you trust.
 
-## ⚙️ How it works
+## How it works
 
 For every candidate the GPU kernel (`gpu/gram-gpu.metal`) runs the full derivation:
 
@@ -111,7 +107,7 @@ The entropy base comes from the system random generator and is fresh for every b
 The GPU only reports which candidate matched. `gram-verify.mjs` then derives the wallet again on the CPU with
 `@ton/crypto` and `@ton/ton`, and the phrase is printed only if that independent result has the suffix.
 
-## 📁 Files
+## Files
 
 | File | Role |
 |---|---|
@@ -121,14 +117,6 @@ The GPU only reports which candidate matched. `gram-verify.mjs` then derives the
 | `gram-verify.mjs` | CPU verification and output of a match |
 | `gram-lib.mjs` | Address and key derivation used by the verifier |
 
-## 📄 License
+## License
 
 [MIT](LICENSE)
-
----
-
-<div align="center">
-
-If you found this useful, consider leaving a ⭐ — it helps a lot!
-
-</div>
